@@ -1,4 +1,9 @@
+from gameobjects import *
 import pygame
+vect = pygame.math.Vector2
+
+
+
 #pygame.init()
 class KeyHandler:
     def __init__(self,game):
@@ -16,13 +21,17 @@ class KeyHandler:
                 if keys[pygame.K_ESCAPE]:
                     self.game.paused = not self.game.paused
                 elif keys[pygame.K_w] or keys[pygame.K_UP]:
-                    self.game.player.up = True
+                    if not self.game.player.up:
+                        self.game.player.up = True
                 elif keys[pygame.K_a] or keys[pygame.K_LEFT]:
-                    self.game.player.left = True
+                    if not self.game.player.left:
+                        self.game.player.left = True
                 elif keys[pygame.K_s] or keys[pygame.K_DOWN]:
-                    self.game.player.down = True
+                    if not self.game.player.down:
+                        self.game.player.down = True
                 elif keys[pygame.K_d] or keys[pygame.K_RIGHT]:
-                    self.game.player.right = True
+                    if not self.game.player.right:
+                        self.game.player.right = True
 
                 else:
                     print(f"Keyboard event: {event.key}")
@@ -41,7 +50,23 @@ class KeyHandler:
                 print(f"Mouse position: {event.pos}, buttons: {event.buttons}")
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:
-                    print(f"X value: {self.game.camhandler.x}, argument: {self.game.camhandler.get_pos()}")
-                    self.game.player.spawn()
+                    #print(f"X value: {self.game.camhandler.x}, argument: {self.game.camhandler.get_pos()}")
+                    #print(f"### Target set to: {event.pos}")
+                    #print(self.game.player.vel)
+                    #self.game.player.spawn()
+                    x,y = event.pos
+                    x+=self.game.camhandler.x
+                    y+=self.game.camhandler.y
+                    pos = (x,y)
+                    self.game.player.set_target(pos)
+                elif event.button == 3:
+                    x, y = event.pos
+                    x += self.game.camhandler.x
+                    y += self.game.camhandler.y
+                    pos = (x, y)
+                    if (vect(pos) - self.game.player.rect.center).length() < 200:
+                        print((vect(pos) - self.game.player.rect.center).length())
+
+                        self.game.all_sprites.add(Tower(self.game, pos))
                 else:
                     print(f"Mouse event: {event.button}")

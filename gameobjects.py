@@ -1,5 +1,8 @@
 import pygame
 import random
+import settings
+
+vect = pygame.math.Vector2
 
 pygame.init()
 
@@ -23,7 +26,7 @@ class Particle(pygame.sprite.Sprite):
         self.image = pygame.Surface([self.width,self.height])
         self.image.fill((random.randint(0,255),random.randint(0,255),random.randint(0,255)))
         self.rect = self.image.get_rect()
-        self.rect.center = (x,y)
+        self.rect.center = vect((x,y))
         self.velx = vx
         self.vely = vy
     
@@ -42,18 +45,23 @@ class Particle(pygame.sprite.Sprite):
             self.vely = 0
         if self.velx == 0 and self.vely == 0:
             self.game.all_sprites.remove(self)
+
+
 class Player(pygame.sprite.Sprite):
     drag = 0.1
+
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
+        self.moves = None
         self.width = 10
         self.height = 10
         self.image = pygame.Surface([self.width,self.height])
         self.image.fill((255,255,255))
         self.rect = self.image.get_rect()
-        self.rect.center = (0,0)
+        self.rect.center = vect((0,0))
         self.velx = 0
         self.vely = 0
+        self.vel = vect(0,0)
         self.left = False
         self.right = False
         self.up = False
@@ -61,28 +69,38 @@ class Player(pygame.sprite.Sprite):
         self.acc = 3
         self.maxvel = 5
         self.game = None
+        self.target = vect((0,0))
+    def move(self,target):
+        pass
 
     def update(self):
-        if self.up and abs(self.vely) < self.maxvel:
-            self.vely -= self.acc
-        if self.down and abs(self.vely) < self.maxvel:
-            self.vely += self.acc
-        if self.left and abs(self.velx) < self.maxvel:
-            self.velx -= self.acc
-        if self.right and abs(self.velx) < self.maxvel:
-            self.velx += self.acc
+        move = self.target - self.rect.center
+        move_length = move.length()
+        if move_length < 10: #speed
+            self.rect.center = self.target
+            #print(f"#### I am at {self.rect.center}")
+        elif move_length != 0:
+            move.normalize_ip()
+            move = move * 10 #speed
+            self.rect.center += move
+    def set_target(self,target):
+        self.target = vect(target)
 
-        self.rect.x += self.velx
-        self.rect.y += self.vely
-        if abs(self.velx) <1.5:
-            self.velx = 0
-        else:
-            self.velx *= 1-self.drag
-
-        if abs(self.vely) < 1.5:
-            self.vely = 0
-        else:
-            self.vely *= 1 - self.drag
     def spawn(self):
         self.game.all_sprites.add(Particle(self.rect.x, self.rect.y,3,3,self.game))
 
+class Tower(pygame.sprite.Sprite):
+    def __init__(self,game,pos):
+        pygame.sprite.Sprite.__init__(self)
+        self.width = 10
+        self.game = game
+        self.height = 10
+        self.image = pygame.Surface([self.width, self.height])
+        self.image.fill(settings.BLACK)
+        self.rect = self.image.get_rect()
+        self.rect.center = vect(pos)
+
+    def spawn(self):
+        self.game.all_sprites.add(Particle(self.rect.x, self.rect.y,3,3,self.game))
+
+    pass

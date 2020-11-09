@@ -1,7 +1,7 @@
-WIDTH = 400
-HEIGHT = 200
+WIDTH = 800
+HEIGHT = 600
 FPS = 30
-scrollspeed = 20
+
 
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)

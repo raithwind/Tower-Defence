@@ -11,6 +11,7 @@ bg = pygame.image.load("view_topdown.png")
 dts = bg.get_rect().size
 bg = pygame.transform.scale(bg,(dts[0]*5,dts[1]*5))
 bg2 = pygame.transform.scale(bg,(dts[0]*5,dts[1]*5))
+vect = pygame.math.Vector2
 
 class Menu:
     def __init__(self, game):
@@ -60,8 +61,7 @@ class Game:
                 #pygame.display.update()
             else:
                 pauseimage = pygame.Surface((settings.WIDTH,settings.HEIGHT))
-                pauseimage.blit(self.world,(0,0),self.camhandler.get_pos())
-                pauseimage.set_alpha(20)
+                pauseimage.fill(settings.WHITE)
                 self.camera.blit(pauseimage,(0,0))
                 pygame.display.flip()
         pygame.quit()
@@ -75,7 +75,9 @@ class Menu:
 
 class Camera:
     def __init__(self):
-        self.camera = pygame.display.set_mode((settings.WIDTH, settings.HEIGHT),pygame.SRCALPHA)#,pygame.FULLSCREEN)
+        self.camera = pygame.display.set_mode((settings.WIDTH, settings.HEIGHT))#,pygame.FULLSCREEN)
+        pygame.display.set_caption("Tower Defense")
+
         self.x = 0
         self.y = 0
 
