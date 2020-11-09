@@ -47,13 +47,10 @@ class KeyHandler:
                     self.game.player.right = False
             #Mouse events
             if event.type == pygame.MOUSEMOTION:
-                print(f"Mouse position: {event.pos}, buttons: {event.buttons}")
+                #print(f"Mouse position: {event.pos}, buttons: {event.buttons}")
+                pass
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:
-                    #print(f"X value: {self.game.camhandler.x}, argument: {self.game.camhandler.get_pos()}")
-                    #print(f"### Target set to: {event.pos}")
-                    #print(self.game.player.vel)
-                    #self.game.player.spawn()
                     x,y = event.pos
                     x+=self.game.camhandler.x
                     y+=self.game.camhandler.y
@@ -65,8 +62,7 @@ class KeyHandler:
                     y += self.game.camhandler.y
                     pos = (x, y)
                     if (vect(pos) - self.game.player.rect.center).length() < 200:
-                        print((vect(pos) - self.game.player.rect.center).length())
-
                         self.game.all_sprites.add(Tower(self.game, pos))
                 else:
                     print(f"Mouse event: {event.button}")
+                    print((vect(event.pos) - vect(self.game.player.rect.center)).length())

@@ -28,7 +28,8 @@ class Game:
         self.clock = pygame.time.Clock()     ## For syncing the FPS
         ## group all the sprites together for ease of update
         self.all_sprites = pygame.sprite.Group()
-
+        self.render_sprites = pygame.sprite.Group()
+        self.count = 0
 
     ## Game loop
         
@@ -43,16 +44,20 @@ class Game:
         self.paused = False
         while self.running:
             self.keyhandler.get_events()
+
+
             if not self.paused:
                 #1 Process input/events
                 self.clock.tick(settings.FPS)     ## will make the loop run at the same speed all the time
                 #2 Update
                 self.all_sprites.update()
 
+
                 #3 Draw/render
                 self.camera.fill(settings.BLACK)
                 self.world.blit(bg2, (0, 0))
-                self.all_sprites.draw(self.world)
+                self.render_sprites.draw(self.world)
+                #self.all_sprites.draw(self.world)
                 self.camera.blit(self.world,(0,0),self.camhandler.get_pos())
                 self.camhandler.x = self.player.rect.x - settings.WIDTH/2
                 self.camhandler.y = self.player.rect.y - settings.HEIGHT/2

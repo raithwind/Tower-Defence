@@ -31,6 +31,13 @@ class Particle(pygame.sprite.Sprite):
         self.vely = vy
     
     def update(self):
+        distance = (vect(self.game.player.rect.center) - vect(self.rect.center)).length()
+        if self not in self.game.render_sprites:
+            if distance < settings.envelope:
+                self.game.render_sprites.add(self)
+        if self in self.game.render_sprites:
+            if distance > settings.envelope:
+                self.game.render_sprites.remove(self)
         self.rect.x += self.velx
         self.rect.y += self.vely
         if abs(self.velx) >1.5:
@@ -44,6 +51,8 @@ class Particle(pygame.sprite.Sprite):
         else:
             self.vely = 0
         if self.velx == 0 and self.vely == 0:
+            if self in self.game.render_sprites:
+                self.game.render_sprites.remove(self)
             self.game.all_sprites.remove(self)
 
 
@@ -69,6 +78,7 @@ class Player(pygame.sprite.Sprite):
         self.acc = 3
         self.maxvel = 5
         self.game = None
+        self.count = 0
         self.target = vect((0,0))
     def move(self,target):
         pass
@@ -83,6 +93,12 @@ class Player(pygame.sprite.Sprite):
             move.normalize_ip()
             move = move * 10 #speed
             self.rect.center += move
+        if self.count >= settings.FPS * 1:
+            print(f"The FPS is: {self.game.clock.get_fps()} with {len(self.game.render_sprites)}")
+            self.count = 0
+        self.count +=1
+
+
     def set_target(self,target):
         self.target = vect(target)
 
@@ -99,8 +115,21 @@ class Tower(pygame.sprite.Sprite):
         self.image.fill(settings.BLACK)
         self.rect = self.image.get_rect()
         self.rect.center = vect(pos)
+        self.count = 0
+        self.delay = random.randint(1,101)/10
 
     def spawn(self):
-        self.game.all_sprites.add(Particle(self.rect.x, self.rect.y,3,3,self.game))
+        self.game.all_sprites.add(Particle(self.rect.x, self.rect.y,40,40,self.game))
+    def update(self):
+        distance = (vect(self.game.player.rect.center) - vect(self.rect.center)).length()
+        if self not in self.game.render_sprites:
 
-    pass
+            if distance < settings.envelope:
+                self.game.render_sprites.add(self)
+        if self in self.game.render_sprites:
+            if distance > settings.envelope:
+                self.game.render_sprites.remove(self)
+        if self.count >= self.delay*settings.FPS:
+            self.spawn()
+            self.count = 0
+        self.count +=1
