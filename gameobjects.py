@@ -70,15 +70,10 @@ class Player(pygame.sprite.Sprite):
         self.image.fill((255, 255, 255))
         self.rect = self.image.get_rect()
         self.rect.center = (50,50)
-        self.velx = 0
-        self.vely = 0
-        self.vel = vect(0, 0)
         self.left = False
         self.right = False
         self.up = False
         self.down = False
-        self.acc = 3
-        self.maxvel = 5
         self.game = None
         self.count = 0
         self.target = vect(50,50)
@@ -100,7 +95,7 @@ class Player(pygame.sprite.Sprite):
             print(f"The FPS is: {self.game.clock.get_fps()} with {len(self.game.render_sprites)}")
             self.count = 0
         self.count += 1
-        # print(dir(self.game.camera))
+
 
     def set_target(self, target):
         self.target = vect(target)
