@@ -1,6 +1,3 @@
-import pygame
-import random
-import settings
 from gameobjects import *
 import gameengine
 
@@ -10,7 +7,6 @@ player.game = game
 game.render_sprites.add(player)
 keyhandler = gameengine.KeyHandler(game)
 
-
 game.all_sprites.add(player)
-## Game loop
+# Game loop
 game.run(keyhandler)

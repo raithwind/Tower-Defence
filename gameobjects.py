@@ -6,13 +6,13 @@ vect = pygame.math.Vector2
 
 pygame.init()
 
-class Particle(pygame.sprite.Sprite):
 
+class Particle(pygame.sprite.Sprite):
     type = "particle"
     drag = 0.05
-    def __init__(self,x,y,vx,vy,game):
-        """
 
+    def __init__(self, x, y, vx, vy, game):
+        """
         :param x: int x coord
         :param y: int y coord
         :param vx: int/float x velocity
@@ -23,15 +23,15 @@ class Particle(pygame.sprite.Sprite):
         self.width = 10
         self.game = game
         self.height = 10
-        self.image = pygame.Surface([self.width,self.height])
-        self.image.fill((random.randint(0,255),random.randint(0,255),random.randint(0,255)))
+        self.image = pygame.Surface([self.width, self.height])
+        self.image.fill((random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)))
         self.rect = self.image.get_rect()
-        self.rect.center = vect((x,y))
+        self.rect.center = vect()
         self.velx = vx
         self.vely = vy
-    
+
     def update(self):
-        distance = (vect(self.game.player.rect.center) - vect(self.rect.center)).length()
+        distance = (vect() - vect()).length()
         if self not in self.game.render_sprites:
             if distance < settings.envelope:
                 self.game.render_sprites.add(self)
@@ -40,14 +40,14 @@ class Particle(pygame.sprite.Sprite):
                 self.game.render_sprites.remove(self)
         self.rect.x += self.velx
         self.rect.y += self.vely
-        if abs(self.velx) >1.5:
-            self.velx *= 1-self.drag
-            #print(f"x: {self.velx}")
+        if abs(self.velx) > 1.5:
+            self.velx *= 1 - self.drag
+            # print(f"x: {self.velx}")
         else:
             self.velx = 0
-        if abs(self.vely) >1.5:
-            self.vely *= 1-self.drag
-            #print(f"y = {self.vely}")
+        if abs(self.vely) > 1.5:
+            self.vely *= 1 - self.drag
+            # print(f"y = {self.vely}")
         else:
             self.vely = 0
         if self.velx == 0 and self.vely == 0:
@@ -64,13 +64,13 @@ class Player(pygame.sprite.Sprite):
         self.moves = None
         self.width = 10
         self.height = 10
-        self.image = pygame.Surface([self.width,self.height])
-        self.image.fill((255,255,255))
+        self.image = pygame.Surface([self.width, self.height])
+        self.image.fill((255, 255, 255))
         self.rect = self.image.get_rect()
-        self.rect.center = vect((0,0))
+        self.rect.center = vect()
         self.velx = 0
         self.vely = 0
-        self.vel = vect(0,0)
+        self.vel = vect()
         self.left = False
         self.right = False
         self.up = False
@@ -79,34 +79,35 @@ class Player(pygame.sprite.Sprite):
         self.maxvel = 5
         self.game = None
         self.count = 0
-        self.target = vect((0,0))
-    def move(self,target):
+        self.target = vect()
+
+    def move(self, target):
         pass
 
     def update(self):
         move = self.target - self.rect.center
         move_length = move.length()
-        if move_length < 10: #speed
+        if move_length < 10:  # speed
             self.rect.center = self.target
-            #print(f"#### I am at {self.rect.center}")
+            # print(f"#### I am at {self.rect.center}")
         elif move_length != 0:
             move.normalize_ip()
-            move = move * 10 #speed
+            move = move * 10  # speed
             self.rect.center += move
         if self.count >= settings.FPS * 1:
             print(f"The FPS is: {self.game.clock.get_fps()} with {len(self.game.render_sprites)}")
             self.count = 0
-        self.count +=1
+        self.count += 1
 
-
-    def set_target(self,target):
-        self.target = vect(target)
+    def set_target(self, target):
+        self.target = vect()
 
     def spawn(self):
-        self.game.all_sprites.add(Particle(self.rect.x, self.rect.y,3,3,self.game))
+        self.game.all_sprites.add(Particle(self.rect.x, self.rect.y, 3, 3, self.game))
+
 
 class Tower(pygame.sprite.Sprite):
-    def __init__(self,game,pos):
+    def __init__(self, game, pos):
         pygame.sprite.Sprite.__init__(self)
         self.width = 10
         self.game = game
@@ -114,14 +115,15 @@ class Tower(pygame.sprite.Sprite):
         self.image = pygame.Surface([self.width, self.height])
         self.image.fill(settings.BLACK)
         self.rect = self.image.get_rect()
-        self.rect.center = vect(pos)
+        self.rect.center = vect()
         self.count = 0
-        self.delay = random.randint(1,101)/10
+        self.delay = random.randint(1, 101) / 10
 
     def spawn(self):
-        self.game.all_sprites.add(Particle(self.rect.x, self.rect.y,40,40,self.game))
+        self.game.all_sprites.add(Particle(self.rect.x, self.rect.y, 40, 40, self.game))
+
     def update(self):
-        distance = (vect(self.game.player.rect.center) - vect(self.rect.center)).length()
+        distance = (vect() - vect()).length()
         if self not in self.game.render_sprites:
 
             if distance < settings.envelope:
@@ -129,7 +131,7 @@ class Tower(pygame.sprite.Sprite):
         if self in self.game.render_sprites:
             if distance > settings.envelope:
                 self.game.render_sprites.remove(self)
-        if self.count >= self.delay*settings.FPS:
+        if self.count >= self.delay * settings.FPS:
             self.spawn()
             self.count = 0
-        self.count +=1
+        self.count += 1
