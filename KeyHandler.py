@@ -9,9 +9,9 @@ class KeyHandler:
         pygame.key.set_repeat()
         self.game = game
 
+    # noinspection PyArgumentList
     def get_events(self):
         for event in pygame.event.get():  # gets all the events which have happened till now and keeps tab of them.
-            print(event)
             # listening for the the X button at the top
             if event.type == pygame.QUIT:
                 self.game.running = False
@@ -65,6 +65,7 @@ class KeyHandler:
                         x += self.game.camhandler.x
                         y += self.game.camhandler.y
                         pos = (x, y)
+                        # noinspection PyArgumentList
                         self.game.player.set_target(vect(pos))
                 elif event.button == 3:
                     x, y = event.pos

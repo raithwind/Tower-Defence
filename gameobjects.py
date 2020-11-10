@@ -7,10 +7,12 @@ vect = pygame.math.Vector2
 pygame.init()
 
 
+# noinspection PyArgumentList
 class Particle(pygame.sprite.Sprite):
     type = "particle"
     drag = 0.05
 
+    # noinspection PyArgumentList
     def __init__(self, x, y, vx, vy, game):
         """
         :param x: int x coord
@@ -33,7 +35,7 @@ class Particle(pygame.sprite.Sprite):
     def update(self):
         distance = (vect(self.game.player.rect.center) - vect(self.rect.center)).length()
         if distance < settings.envelope:
-                self.game.render_sprites.add(self)
+            self.game.render_sprites.add(self)
         if self in self.game.render_sprites:
             if distance > settings.envelope:
                 self.game.render_sprites.remove(self)
@@ -55,6 +57,7 @@ class Particle(pygame.sprite.Sprite):
             self.game.all_sprites.remove(self)
 
 
+# noinspection PyArgumentList
 class Player(pygame.sprite.Sprite):
     drag = 0.1
 
@@ -106,6 +109,7 @@ class Player(pygame.sprite.Sprite):
         self.game.all_sprites.add(Particle(self.rect.x, self.rect.y, 3, 3, self.game))
 
 
+# noinspection PyArgumentList
 class Tower(pygame.sprite.Sprite):
     def __init__(self, game, pos):
         pygame.sprite.Sprite.__init__(self)
