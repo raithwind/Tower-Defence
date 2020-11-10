@@ -57,7 +57,8 @@ class Game:
                 # self.all_sprites.draw(self.world)
                 self.camera.blit(self.world, (0, 0), self.camhandler.get_pos())
                 self.camhandler.x = self.player.rect.x - settings.WIDTH / 2
-                self.camhandler.y = self.player.rect.y - settings.HEIGHT / 2
+                self.camhandler.y = self.player.rect.y - settings.HEIGHT/2
+                print(f"{self.player.rect.y} {self.camhandler.y}")
                 pygame.display.flip()
                 # Done after drawing everything to the screen
                 # pygame.display.update()
@@ -83,3 +84,19 @@ class Camera:
 
     def get_camera(self):
         return self.camera
+
+# def Renderer:
+#     def __init__(self,game,sprte):
+#         self.game = game
+#         self.sprte = sprte
+#
+#     def run(self):
+#         distance =  vect(self.game.player.rect.center) - vect(self.sprte.rect.center)
+#         distance = distance.length()
+#         if distance < settings.envelope:
+#             if self.sprte not in self.game.render_sprites:
+#                 self.game.render_sprites.add(self.sprte)
+#         if distance > settings.envelope:
+#             if self.sprte in self.game.render_sprites:
+#                 self.game.render_sprites.remove(self.sprte)
+#

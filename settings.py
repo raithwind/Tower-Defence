@@ -2,7 +2,7 @@ WIDTH = 800
 HEIGHT = 600
 FPS = 30
 
-envelope = 400
+envelope = 100
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 RED = (255, 0, 0)

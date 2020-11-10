@@ -59,17 +59,18 @@ class KeyHandler:
                                 print(f"PRESSED {button}")
                                 continue
                     else:
+                        #print(f"HHH {event.pos}")
                         x, y = event.pos
                         x += self.game.camhandler.x
                         y += self.game.camhandler.y
                         pos = (x, y)
-                        self.game.player.set_target(pos)
+                        self.game.player.set_target(vect(pos))
                 elif event.button == 3:
                     x, y = event.pos
                     x += self.game.camhandler.x
                     y += self.game.camhandler.y
                     pos = (x, y)
-                    if (vect() - self.game.player.rect.center).length() < 200:
+                    if (vect(pos) - self.game.player.rect.center).length() < 200:
                         self.game.all_sprites.add(Tower(self.game, pos))
                 else:
                     print(f"Mouse event: {event.button}")
