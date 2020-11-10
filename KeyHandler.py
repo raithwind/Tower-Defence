@@ -60,7 +60,7 @@ class KeyHandler:
                                 print(f"PRESSED {button}")
                                 continue
                     else:
-                        #print(f"HHH {event.pos}")
+                        # print(f"HHH {event.pos}")
                         x, y = event.pos
                         x += self.game.camhandler.x
                         y += self.game.camhandler.y

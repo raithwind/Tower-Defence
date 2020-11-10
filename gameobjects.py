@@ -28,7 +28,7 @@ class Particle(pygame.sprite.Sprite):
         self.image = pygame.Surface([self.width, self.height])
         self.image.fill((random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)))
         self.rect = self.image.get_rect()
-        self.rect.center = vect(x,y)
+        self.rect.center = vect(x, y)
         self.velx = vx
         self.vely = vy
 
@@ -69,10 +69,10 @@ class Player(pygame.sprite.Sprite):
         self.image = pygame.Surface([self.width, self.height])
         self.image.fill((255, 255, 255))
         self.rect = self.image.get_rect()
-        self.rect.center = (0,0)
+        self.rect.center = (0, 0)
         self.velx = 0
         self.vely = 0
-        self.vel = vect(0,0)
+        self.vel = vect(0, 0)
         self.left = False
         self.right = False
         self.up = False
@@ -100,7 +100,7 @@ class Player(pygame.sprite.Sprite):
             print(f"The FPS is: {self.game.clock.get_fps()} with {len(self.game.render_sprites)}")
             self.count = 0
         self.count += 1
-        #print(dir(self.game.camera))
+        # print(dir(self.game.camera))
 
     def set_target(self, target):
         self.target = vect(target)
@@ -121,7 +121,7 @@ class Tower(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.center = vect(pos)
         self.count = 0
-        self.delay = 1 #random.randint(1, 101) / 10
+        self.delay = 1  # random.randint(1, 101) / 10
 
     def spawn(self):
         self.game.all_sprites.add(Particle(self.rect.x, self.rect.y, 40, 40, self.game))
@@ -134,7 +134,9 @@ class Tower(pygame.sprite.Sprite):
         if self in self.game.render_sprites:
             if distance > settings.envelope:
                 self.game.render_sprites.remove(self)
-        if self.count >= self.delay*settings.FPS:
+        if self.count >= self.delay * settings.FPS:
             self.spawn()
             self.count = 0
-        self.count +=1
+        self.count += 1
+
+

@@ -23,6 +23,7 @@ class Menu:
 class Game:
     def __init__(self, player):
         self.camhandler = Camera()
+
         self.font = pygame.font.SysFont("Comic Sans MS", 30)
         self.player = player
         self.camera = self.camhandler.get_camera()
@@ -35,16 +36,18 @@ class Game:
         self.render_sprites = pygame.sprite.Group()
         self.count = 0
         self.buttons = []
-
+        self.paused = True
+        self.playing = False
     # Game loop
     def run(self, keyhandler):
         self.keyhandler = keyhandler
         self.running = True
-        self.paused = False
+
         while self.running:
             self.keyhandler.get_events()
-
-            if not self.paused:
+            if self.playing == False:
+                Menus.Start(self)
+            if not self.paused and self.playing:
                 # 1 Process input/events
                 self.clock.tick(settings.FPS)  # will make the loop run at the same speed all the time
                 # 2 Update
@@ -63,10 +66,7 @@ class Game:
                 # pygame.display.update()
             else:
                 Menus.Pause(self)
-                # pauseimage = pygame.Surface((settings.WIDTH,settings.HEIGHT))
-                # pauseimage.fill(settings.WHITE)
-                # self.camera.blit(pauseimage,(0,0))
-                # pygame.display.flip()
+
         pygame.quit()
 
 
