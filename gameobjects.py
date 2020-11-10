@@ -59,17 +59,17 @@ class Particle(pygame.sprite.Sprite):
 
 # noinspection PyArgumentList
 class Player(pygame.sprite.Sprite):
-    drag = 0.1
+    drag = 1
 
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
         self.moves = None
         self.width = 10
-        self.height = 10
+        self.height = 40
         self.image = pygame.Surface([self.width, self.height])
         self.image.fill((255, 255, 255))
         self.rect = self.image.get_rect()
-        self.rect.center = (0, 0)
+        self.rect.center = (50,50)
         self.velx = 0
         self.vely = 0
         self.vel = vect(0, 0)
@@ -81,7 +81,7 @@ class Player(pygame.sprite.Sprite):
         self.maxvel = 5
         self.game = None
         self.count = 0
-        self.target = vect()
+        self.target = vect(50,50)
 
     def move(self, target):
         pass

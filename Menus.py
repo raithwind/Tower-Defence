@@ -47,8 +47,14 @@ class QuitButton(Button):
         super().__init__(text,game,x,y,color)
 
     def click(self):
-        self.game.running = False
+        if not self.game.playing:
+            self.game.running = False
+        else:
+            """
+            To do: Implement are you sure you wish to quit with a sprite box.
+            """
 
+            self.game.running = False
 
 class Menu:
     def __init__(self, game):
