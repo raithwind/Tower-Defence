@@ -58,7 +58,6 @@ class Game:
                 self.camera.blit(self.world, (0, 0), self.camhandler.get_pos())
                 self.camhandler.x = self.player.rect.x - settings.WIDTH / 2
                 self.camhandler.y = self.player.rect.y - settings.HEIGHT/2
-                print(f"{self.player.rect.y} {self.camhandler.y}")
                 pygame.display.flip()
                 # Done after drawing everything to the screen
                 # pygame.display.update()
@@ -73,7 +72,7 @@ class Game:
 
 class Camera:
     def __init__(self):
-        self.camera = pygame.display.set_mode((settings.WIDTH, settings.HEIGHT))  # ,pygame.FULLSCREEN)
+        self.camera = pygame.display.set_mode((settings.WIDTH, settings.HEIGHT))#, pygame.FULLSCREEN)
         pygame.display.set_caption("Tower Defense")
 
         self.x = 0

@@ -11,6 +11,7 @@ class KeyHandler:
 
     def get_events(self):
         for event in pygame.event.get():  # gets all the events which have happened till now and keeps tab of them.
+            print(event)
             # listening for the the X button at the top
             if event.type == pygame.QUIT:
                 self.game.running = False
