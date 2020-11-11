@@ -29,6 +29,8 @@ class Game:
         self.camera = self.camhandler.get_camera()
         # self.world = pygame.display.set_mode((settings.WIDTH, settings.HEIGHT))
         self.bg = bg
+        self.gamestate = {"paused":False,"playing":False,"menu":True}
+        #self.menud = False
         self.world = self.bg
         self.clock = pygame.time.Clock()  # For syncing the FPS
         # group all the sprites together for ease of update
@@ -36,36 +38,43 @@ class Game:
         self.render_sprites = pygame.sprite.Group()
         self.count = 0
         self.buttons = []
-        self.paused = True
-        self.playing = False
+        #self.paused = False
+        #self.playing = False
+        self.mouseoffset = (0,0)
     # Game loop
+    def Render(self):
+        self.camera.fill(settings.BLACK)
+        self.world.blit(bg2, (0, 0))
+        self.render_sprites.draw(self.world)
+        self.camera.blit(self.world, (0, 0), self.camhandler.get_pos())
+        self.camhandler.x = self.player.rect.x - settings.WIDTH / 2
+        self.camhandler.y = self.player.rect.y - settings.HEIGHT / 2
+        pygame.display.update()
+
     def run(self, keyhandler):
+        print(self.mouseoffset)
         self.keyhandler = keyhandler
         self.running = True
 
         while self.running:
             self.keyhandler.get_events()
-            if self.playing == False:
+            if not self.gamestate["playing"]:
                 Menus.Start(self)
-            if not self.paused and self.playing:
+            if not self.gamestate["paused"] and self.gamestate["playing"]:
+            #if not self.paused and self.playing:
                 # 1 Process input/events
                 self.clock.tick(settings.FPS)  # will make the loop run at the same speed all the time
                 # 2 Update
                 self.all_sprites.update()
 
                 # 3 Draw/render
-                self.camera.fill(settings.BLACK)
-                self.world.blit(bg2, (0, 0))
-                self.render_sprites.draw(self.world)
-                # self.all_sprites.draw(self.world)
-                self.camera.blit(self.world, (0, 0), self.camhandler.get_pos())
-                self.camhandler.x = self.player.rect.x - settings.WIDTH / 2
-                self.camhandler.y = self.player.rect.y - settings.HEIGHT/2
-                pygame.display.flip()
+                self.Render()
+                #pygame.display.flip()
                 # Done after drawing everything to the screen
-                # pygame.display.update()
-            else:
+                #
+            if self.gamestate["paused"]:
                 Menus.Pause(self)
+
 
         pygame.quit()
 
@@ -84,18 +93,3 @@ class Camera:
     def get_camera(self):
         return self.camera
 
-# def Renderer:
-#     def __init__(self,game,sprte):
-#         self.game = game
-#         self.sprte = sprte
-#
-#     def run(self):
-#         distance =  vect(self.game.player.rect.center) - vect(self.sprte.rect.center)
-#         distance = distance.length()
-#         if distance < settings.envelope:
-#             if self.sprte not in self.game.render_sprites:
-#                 self.game.render_sprites.add(self.sprte)
-#         if distance > settings.envelope:
-#             if self.sprte in self.game.render_sprites:
-#                 self.game.render_sprites.remove(self.sprte)
-#

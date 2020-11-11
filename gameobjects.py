@@ -69,14 +69,14 @@ class Player(pygame.sprite.Sprite):
         self.image = pygame.Surface([self.width, self.height])
         self.image.fill((255, 255, 255))
         self.rect = self.image.get_rect()
-        self.rect.center = (50,50)
+        self.rect.center = (50, 50)
         self.left = False
         self.right = False
         self.up = False
         self.down = False
         self.game = None
         self.count = 0
-        self.target = vect(50,50)
+        self.target = vect(50, 50)
 
     def move(self, target):
         pass
@@ -95,7 +95,6 @@ class Player(pygame.sprite.Sprite):
             print(f"The FPS is: {self.game.clock.get_fps()} with {len(self.game.render_sprites)}")
             self.count = 0
         self.count += 1
-
 
     def set_target(self, target):
         self.target = vect(target)
@@ -119,7 +118,7 @@ class Tower(pygame.sprite.Sprite):
         self.delay = 1  # random.randint(1, 101) / 10
 
     def spawn(self):
-        self.game.all_sprites.add(Particle(self.rect.x, self.rect.y, 40, 40, self.game))
+        self.game.all_sprites.add(Particle(self.rect.x, self.rect.y, 10, 10, self.game))
 
     def update(self):
         distance = (vect(self.game.player.rect.center) - vect(self.rect.center)).length()
@@ -133,5 +132,3 @@ class Tower(pygame.sprite.Sprite):
             self.spawn()
             self.count = 0
         self.count += 1
-
-

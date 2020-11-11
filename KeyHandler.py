@@ -19,9 +19,12 @@ class KeyHandler:
             if event.type == pygame.KEYDOWN:
                 keys = pygame.key.get_pressed()
                 if keys[pygame.K_ESCAPE]:
-                    if self.game.paused:
+                    #if self.game.paused:
+                    if self.game.gamestate["paused"]:
                         self.game.buttons = []
-                    self.game.paused = not self.game.paused
+                    self.game.gamestate["paused"] = not self.game.gamestate["paused"]
+                    if self.game.gamestate["menu"]:
+                        self.game.gamestate["menu"] = False
                 elif keys[pygame.K_w] or keys[pygame.K_UP]:
                     if not self.game.player.up:
                         self.game.player.up = True
@@ -53,9 +56,12 @@ class KeyHandler:
                 pass
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:
-                    if self.game.paused:
+                    print(f"Current gamestates: {self.game.gamestate}")
+                    if self.game.gamestate["menu"]:
+                        npos = (event.pos[0] - self.game.mouseoffset[0], event.pos[1] - self.game.mouseoffset[1])
+                        print(f"Mouse pos = {event.pos}, altered pos = {npos}")
                         for button in self.game.buttons:
-                            if button.rect.collidepoint(event.pos):
+                            if button.rect.collidepoint(npos):
                                 button.click()
                                 print(f"PRESSED {button}")
                                 continue
