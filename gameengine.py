@@ -29,8 +29,7 @@ class Game:
         self.camera = self.camhandler.get_camera()
         # self.world = pygame.display.set_mode((settings.WIDTH, settings.HEIGHT))
         self.bg = bg
-        self.gamestate = {"paused":False,"playing":False,"menu":True}
-        #self.menud = False
+        self.gamestate = {"paused":False, "playing":False, "menu":True, "cutscene":False}
         self.world = self.bg
         self.clock = pygame.time.Clock()  # For syncing the FPS
         # group all the sprites together for ease of update
@@ -38,8 +37,6 @@ class Game:
         self.render_sprites = pygame.sprite.Group()
         self.count = 0
         self.buttons = []
-        #self.paused = False
-        #self.playing = False
         self.mouseoffset = (0,0)
     # Game loop
     def Render(self):

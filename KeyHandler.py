@@ -19,7 +19,6 @@ class KeyHandler:
             if event.type == pygame.KEYDOWN:
                 keys = pygame.key.get_pressed()
                 if keys[pygame.K_ESCAPE]:
-                    #if self.game.paused:
                     if self.game.gamestate["paused"]:
                         self.game.buttons = []
                     self.game.gamestate["paused"] = not self.game.gamestate["paused"]
@@ -65,14 +64,14 @@ class KeyHandler:
                                 button.click()
                                 print(f"PRESSED {button}")
                                 continue
-                    else:
-                        # print(f"HHH {event.pos}")
-                        x, y = event.pos
-                        x += self.game.camhandler.x
-                        y += self.game.camhandler.y
-                        pos = (x, y)
-                        # noinspection PyArgumentList
-                        self.game.player.set_target(vect(pos))
+                    # else:
+                    #     # print(f"HHH {event.pos}")
+                    #     x, y = event.pos
+                    #     x += self.game.camhandler.x
+                    #     y += self.game.camhandler.y
+                    #     pos = (x, y)
+                    #     # noinspection PyArgumentList
+                    #     self.game.player.set_target(vect(pos))
                 elif event.button == 3:
                     x, y = event.pos
                     x += self.game.camhandler.x

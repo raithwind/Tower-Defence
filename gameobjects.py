@@ -82,10 +82,23 @@ class Player(pygame.sprite.Sprite):
         pass
 
     def update(self):
+        # print(f"HHH {event.pos}")
+        keys = pygame.mouse.get_pressed()
+        if keys[0]:
+            #print(keys)
+            # find target position
+            x, y = pygame.mouse.get_pos()
+            x += self.game.camhandler.x
+            y += self.game.camhandler.y
+            pos = (x, y)
+            # set the target
+            # noinspection PyArgumentList
+            self.set_target(vect(pos))
         move = vect(self.target) - vect(self.rect.center)
         move_length = move.length()
         if move_length < 10:  # speed
-            self.rect.center = self.target
+            pass
+            #self.rect.center = self.target
             # print(f"#### I am at {self.rect.center}")
         elif move_length != 0:
             move.normalize_ip()

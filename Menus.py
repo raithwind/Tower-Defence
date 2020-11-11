@@ -12,7 +12,6 @@ class Button(pygame.sprite.Sprite):
         self.image = pygame.Surface([self.width, self.height])
         self.image.fill(color)
         self.rect = self.image.get_rect()
-        #self.rect.topleft = (x+offset[0], y+offset[1])
         self.rect.midleft = (x,y)
         self.textsurface = self.game.font.render(text, False, (0, 0, 0))
         self.image.blit(self.textsurface, (0, 0))
@@ -24,7 +23,7 @@ class Button(pygame.sprite.Sprite):
 class StartButton(Button):
     def __init__(self, text, game, x, y, color):
         super().__init__(text, game, x, y, color)
-        
+
 
     def click(self):
         self.game.gamestate["playing"] = True
