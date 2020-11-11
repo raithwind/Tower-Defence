@@ -11,11 +11,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="036f5f52-5059-41e5-b0c4-300cfda11804" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Buttons.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KeyHandler.py" beforeDir="false" afterPath="$PROJECT_DIR$/KeyHandler.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Menus.py" beforeDir="false" afterPath="$PROJECT_DIR$/Menus.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gameengine.py" beforeDir="false" afterPath="$PROJECT_DIR$/gameengine.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameobjects.py" beforeDir="false" afterPath="$PROJECT_DIR$/gameobjects.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/settings.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,6 +50,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/main.py" />
+    <property name="restartRequiresConfirmation" value="false" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="Errors" />
   </component>
@@ -209,7 +210,14 @@
       <option name="project" value="LOCAL" />
       <updated>1605057358095</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Added mouse follow while mouse button 1 is pressed, and continue to last pressed location on release.">
+      <created>1605060591482</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1605060591482</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -230,7 +238,8 @@
     <MESSAGE value="Added pause menu, buttons and cleaned up code" />
     <MESSAGE value="Added Start Menu, changed button handling. Still need to work on transition between start menu and game" />
     <MESSAGE value="Changes game state handling, modified menus to allow menus to not need to take the whole screen, and to be able to track the relative position of the buttons." />
-    <option name="LAST_COMMIT_MESSAGE" value="Changes game state handling, modified menus to allow menus to not need to take the whole screen, and to be able to track the relative position of the buttons." />
+    <MESSAGE value="Added mouse follow while mouse button 1 is pressed, and continue to last pressed location on release." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added mouse follow while mouse button 1 is pressed, and continue to last pressed location on release." />
   </component>
   <component name="WindowStateProjectService">
     <state x="586" y="198" key="#Inspections" timestamp="1604973973928">
@@ -245,42 +254,42 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="718" y="390" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1920.1040/-1920.7.1920.1040@0.0.1920.1040" timestamp="1604618419144" />
-    <state x="587" y="88" key="CommitChangelistDialog2" timestamp="1605057357459">
+    <state x="337" y="88" key="CommitChangelistDialog2" timestamp="1605060590829">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="587" y="88" key="CommitChangelistDialog2/0.0.1920.1040/-1920.7.1920.1040@0.0.1920.1040" timestamp="1605057357459" />
+    <state x="337" y="88" key="CommitChangelistDialog2/0.0.1920.1040/-1920.7.1920.1040@0.0.1920.1040" timestamp="1605060590829" />
     <state x="740" y="287" key="FileChooserDialogImpl" timestamp="1604616880674">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="287" key="FileChooserDialogImpl/0.0.1920.1040/-1920.7.1920.1040@0.0.1920.1040" timestamp="1604616880674" />
-    <state width="1899" height="282" key="GridCell.Tab.0.bottom" timestamp="1605059899902">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1899" height="282" key="GridCell.Tab.0.bottom" timestamp="1605085483230">
+      <screen x="-1920" y="7" width="1920" height="1040" />
     </state>
-    <state width="1899" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1920.7.1920.1040@-1920.7.1920.1040" timestamp="1604910866491" />
+    <state width="1899" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1920.7.1920.1040@-1920.7.1920.1040" timestamp="1605085483230" />
     <state width="1899" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1920.7.1920.1040@0.0.1920.1040" timestamp="1605059899902" />
-    <state width="1899" height="282" key="GridCell.Tab.0.center" timestamp="1605059899902">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1899" height="282" key="GridCell.Tab.0.center" timestamp="1605085483230">
+      <screen x="-1920" y="7" width="1920" height="1040" />
     </state>
-    <state width="1899" height="282" key="GridCell.Tab.0.center/0.0.1920.1040/-1920.7.1920.1040@-1920.7.1920.1040" timestamp="1604910866491" />
+    <state width="1899" height="282" key="GridCell.Tab.0.center/0.0.1920.1040/-1920.7.1920.1040@-1920.7.1920.1040" timestamp="1605085483230" />
     <state width="1899" height="282" key="GridCell.Tab.0.center/0.0.1920.1040/-1920.7.1920.1040@0.0.1920.1040" timestamp="1605059899902" />
-    <state width="1899" height="282" key="GridCell.Tab.0.left" timestamp="1605059899902">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1899" height="282" key="GridCell.Tab.0.left" timestamp="1605085483229">
+      <screen x="-1920" y="7" width="1920" height="1040" />
     </state>
-    <state width="1899" height="282" key="GridCell.Tab.0.left/0.0.1920.1040/-1920.7.1920.1040@-1920.7.1920.1040" timestamp="1604910866491" />
+    <state width="1899" height="282" key="GridCell.Tab.0.left/0.0.1920.1040/-1920.7.1920.1040@-1920.7.1920.1040" timestamp="1605085483229" />
     <state width="1899" height="282" key="GridCell.Tab.0.left/0.0.1920.1040/-1920.7.1920.1040@0.0.1920.1040" timestamp="1605059899902" />
-    <state width="1899" height="282" key="GridCell.Tab.0.right" timestamp="1605059899902">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1899" height="282" key="GridCell.Tab.0.right" timestamp="1605085483230">
+      <screen x="-1920" y="7" width="1920" height="1040" />
     </state>
-    <state width="1899" height="282" key="GridCell.Tab.0.right/0.0.1920.1040/-1920.7.1920.1040@-1920.7.1920.1040" timestamp="1604910866491" />
+    <state width="1899" height="282" key="GridCell.Tab.0.right/0.0.1920.1040/-1920.7.1920.1040@-1920.7.1920.1040" timestamp="1605085483230" />
     <state width="1899" height="282" key="GridCell.Tab.0.right/0.0.1920.1040/-1920.7.1920.1040@0.0.1920.1040" timestamp="1605059899902" />
     <state x="461" y="165" width="1224" height="710" key="SettingsEditor" timestamp="1604975158394">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="461" y="165" width="1224" height="710" key="SettingsEditor/0.0.1920.1040/-1920.7.1920.1040@0.0.1920.1040" timestamp="1604975158394" />
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1605057360874">
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1605060594939">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040/-1920.7.1920.1040@0.0.1920.1040" timestamp="1605057360874" />
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040/-1920.7.1920.1040@0.0.1920.1040" timestamp="1605060594939" />
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1604910387403">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

@@ -27,7 +27,6 @@ class Game:
         self.font = pygame.font.SysFont("Comic Sans MS", 30)
         self.player = player
         self.camera = self.camhandler.get_camera()
-        # self.world = pygame.display.set_mode((settings.WIDTH, settings.HEIGHT))
         self.bg = bg
         self.gamestate = {"paused":False, "playing":False, "menu":True, "cutscene":False}
         self.world = self.bg
