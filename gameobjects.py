@@ -66,8 +66,14 @@ class Player(pygame.sprite.Sprite):
         self.moves = None
         self.width = 10
         self.height = 40
+        self.disp = pygame.display.set_mode((settings.WIDTH, settings.HEIGHT), pygame.SRCALPHA)
         self.image = pygame.Surface([self.width, self.height])
-        self.image.fill((255, 255, 255))
+        self.image = pygame.image.load("test icon.png")
+        self.image = self.image.convert()
+        self.image.set_colorkey((0,0,220))
+        #self.image.fill((100, 100, 100, 0))
+
+        self.orig_image = self.image
         self.rect = self.image.get_rect()
         self.rect.center = (50, 50)
         self.left = False
@@ -84,22 +90,25 @@ class Player(pygame.sprite.Sprite):
     def update(self):
         # print(f"HHH {event.pos}")
         keys = pygame.mouse.get_pressed()
+        x, y = pygame.mouse.get_pos()
+        x += self.game.camhandler.x
+        y += self.game.camhandler.y
+        pos = (x, y)
+        radius, angle = (vect(pos)-vect(self.rect.center)).as_polar()
+        print(f"Radius: {radius}, Angle: {angle}")
+        if radius > 40:
+            self.image = pygame.transform.rotate(self.orig_image, -angle+90)
+            # Create a new rect with the center of the old rect.
+            self.rect = self.image.get_rect(center=self.rect.center)
         if keys[0]:
-            #print(keys)
             # find target position
-            x, y = pygame.mouse.get_pos()
-            x += self.game.camhandler.x
-            y += self.game.camhandler.y
-            pos = (x, y)
-            # set the target
-            # noinspection PyArgumentList
+
+             # noinspection PyArgumentList
             self.set_target(vect(pos))
         move = vect(self.target) - vect(self.rect.center)
         move_length = move.length()
         if move_length < 10:  # speed
             pass
-            #self.rect.center = self.target
-            # print(f"#### I am at {self.rect.center}")
         elif move_length != 0:
             move.normalize_ip()
             move = move * 10  # speed

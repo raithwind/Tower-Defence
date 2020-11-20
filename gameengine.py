@@ -22,10 +22,11 @@ class Menu:
 
 class Game:
     def __init__(self, player):
-        self.camhandler = Camera()
+        self.player = player
+        self.camhandler = Camera(self)
 
         self.font = pygame.font.SysFont("Comic Sans MS", 30)
-        self.player = player
+
         self.camera = self.camhandler.get_camera()
         self.bg = bg
         self.gamestate = {"paused":False, "playing":False, "menu":True, "cutscene":False}
@@ -43,8 +44,8 @@ class Game:
         self.world.blit(bg2, (0, 0))
         self.render_sprites.draw(self.world)
         self.camera.blit(self.world, (0, 0), self.camhandler.get_pos())
-        self.camhandler.x = self.player.rect.x - settings.WIDTH / 2
-        self.camhandler.y = self.player.rect.y - settings.HEIGHT / 2
+        self.camhandler.x = self.player.rect.centerx - settings.WIDTH / 2
+        self.camhandler.y = self.player.rect.centery - settings.HEIGHT / 2
         pygame.display.update()
 
     def run(self, keyhandler):
@@ -76,8 +77,9 @@ class Game:
 
 
 class Camera:
-    def __init__(self):
-        self.camera = pygame.display.set_mode((settings.WIDTH, settings.HEIGHT))#, pygame.FULLSCREEN)
+    def __init__(self,game):
+        self.game = game
+        self.camera = self.game.player.disp #pygame.display.set_mode((settings.WIDTH, settings.HEIGHT),pygame.SRCALPHA)#, pygame.FULLSCREEN)
         pygame.display.set_caption("Tower Defense")
 
         self.x = 0
