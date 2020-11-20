@@ -51,27 +51,16 @@ class KeyHandler:
                     self.game.player.right = False
             # Mouse events
             if event.type == pygame.MOUSEMOTION:
-                # print(f"Mouse position: {event.pos}, buttons: {event.buttons}")
                 pass
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:
-                    print(f"Current gamestates: {self.game.gamestate}")
                     if self.game.gamestate["menu"]:
                         npos = (event.pos[0] - self.game.mouseoffset[0], event.pos[1] - self.game.mouseoffset[1])
-                        print(f"Mouse pos = {event.pos}, altered pos = {npos}")
                         for button in self.game.buttons:
                             if button.rect.collidepoint(npos):
                                 button.click()
                                 print(f"PRESSED {button}")
                                 continue
-                    # else:
-                    #     # print(f"HHH {event.pos}")
-                    #     x, y = event.pos
-                    #     x += self.game.camhandler.x
-                    #     y += self.game.camhandler.y
-                    #     pos = (x, y)
-                    #     # noinspection PyArgumentList
-                    #     self.game.player.set_target(vect(pos))
                 elif event.button == 3:
                     x, y = event.pos
                     x += self.game.camhandler.x

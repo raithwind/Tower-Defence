@@ -49,7 +49,6 @@ class Game:
         pygame.display.update()
 
     def run(self, keyhandler):
-        print(self.mouseoffset)
         self.keyhandler = keyhandler
         self.running = True
 
